@@ -1,0 +1,20 @@
+CREATE TABLE Movies (
+    ID INTEGER PRIMARY KEY AUTOINCREMENT,
+    Title TEXT,
+    Director TEXT,
+    ReleaseYear INTEGER
+    -- Add more columns as needed
+);
+
+using System.Data.SQLite;
+
+SQLiteConnection connection = new SQLiteConnection("Data Source=movie_database.sqlite;Version=3;");
+connection.Open();
+
+
+string query = "INSERT INTO Movies (Title, Director, ReleaseYear) VALUES (@title, @director, @releaseYear)";
+SQLiteCommand command = new SQLiteCommand(query, connection);
+command.Parameters.AddWithValue("@title", title);
+command.Parameters.AddWithValue("@director", director);
+command.Parameters.AddWithValue("@releaseYear", releaseYear);
+command.ExecuteNonQuery();
